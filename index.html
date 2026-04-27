@@ -1545,6 +1545,7 @@ function parseCSV(text) {
   const iProrrDef   = col('Prorrogacao_Defesa');
   const iStatus     = col('Status');
   const iBolsista   = col('Bolsista');
+  const iLinkTcc    = col('Link_TCC');
 
   function fmtD(v) {
     if (!v || v.trim()==='' || v==='nan') return null;
@@ -1582,7 +1583,7 @@ function parseCSV(text) {
       defesa:       def,
       status:       val(row, iStatus),
       bolsista:     val(row, iBolsista),
-      linkTcc:      val(row, idx['Link_TCC']) || '',
+      linkTcc:      val(row, iLinkTcc) || '',
       turma:        ing ? parseInt(ing.slice(0,4)) : null,
     };
   }).filter(Boolean);
