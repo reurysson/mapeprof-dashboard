@@ -1292,9 +1292,12 @@ function renderTabela() {
     const bolsistaBadge = (d.bolsista && d.bolsista.toLowerCase() === 'sim')
       ? ' <span style="display:inline-block;font-size:0.65rem;font-weight:700;background:#fff4e0;color:var(--amarelo);border:1px solid #f0c070;border-radius:4px;padding:1px 5px;vertical-align:middle;" title="Bolsista">★ Bolsista</span>'
       : '';
+    const nomeLabel = d.linkTcc
+      ? `<a href="${d.linkTcc}" target="_blank" title="Acessar dissertação no repositório institucional" onclick="event.stopPropagation()" style="color:var(--verde);text-decoration:none;font-weight:500;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${d.nome} <span style="font-size:0.7rem;opacity:0.7;">↗</span></a>`
+      : d.nome;
 
     return `<tr onclick="abrirModal('${d.matricula}','${d.nome.replace(/'/g,"\\'")}')">
-      <td class="nome-cell">${d.nome}${bolsistaBadge}</td>
+      <td class="nome-cell">${nomeLabel}${bolsistaBadge}</td>
       <td>${d.turma||'—'}</td>
       <td>${d.linha||'—'}</td>
       <td style="font-size:0.8rem">${nomeCurto(d.orientador)||'—'}</td>
@@ -1471,6 +1474,7 @@ function abrirModal(matricula, nome) {
       <div class="modal-field"><label>Status</label><div class="val"><span class="badge-status ${d.status}">${d.status}</span></div></div>
       <div class="modal-field"><label>Qualificação realizada</label><div class="val">${fmtDate(d.qualificacao)}</div></div>
       <div class="modal-field"><label>Defesa realizada</label><div class="val">${fmtDate(d.defesa)}</div></div>
+      ${d.linkTcc ? `<div class="modal-field" style="grid-column:1/-1"><label>Dissertação</label><div class="val"><a href="${d.linkTcc}" target="_blank" style="color:var(--verde);font-weight:500;">Acessar no repositório institucional ↗</a></div></div>` : ''}
     </div>
 
     <div class="modal-timeline">
@@ -1578,6 +1582,7 @@ function parseCSV(text) {
       defesa:       def,
       status:       val(row, iStatus),
       bolsista:     val(row, iBolsista),
+      linkTcc:      val(row, idx['Link_TCC']) || '',
       turma:        ing ? parseInt(ing.slice(0,4)) : null,
     };
   }).filter(Boolean);
