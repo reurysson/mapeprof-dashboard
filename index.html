@@ -1430,7 +1430,7 @@ function renderTabela() {
     }
 
     const bolsistaBadge = (d.bolsista && d.bolsista.toLowerCase() === 'sim')
-      ? ' <span style="display:inline-block;font-size:0.65rem;font-weight:700;background:#fff4e0;color:var(--amarelo);border:1px solid #f0c070;border-radius:4px;padding:1px 5px;vertical-align:middle;" title="${T.bolsista}">★ ${T.bolsista}</span>'
+      ? ` <span style="display:inline-block;font-size:0.65rem;font-weight:700;background:#fff4e0;color:var(--amarelo);border:1px solid #f0c070;border-radius:4px;padding:1px 5px;vertical-align:middle;" title="${T.bolsista}">★ ${T.bolsista}</span>`
       : '';
     const nomeLabel = d.linkTcc
       ? `<a href="${d.linkTcc}" target="_blank" title="Acessar dissertação no repositório institucional" onclick="event.stopPropagation()" style="color:var(--verde);text-decoration:none;font-weight:500;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${d.nome} <span style="font-size:0.7rem;opacity:0.7;">↗</span></a>`
